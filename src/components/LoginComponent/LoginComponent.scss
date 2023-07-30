@@ -1,5 +1,6 @@
 .textLogin{
     color: #081B4E;
+    font-size: 2.5rem;
 }
 .ponto{
     color: #F43724;
@@ -7,8 +8,18 @@
 .labelLogin{
     color: #777777;
     font-weight: 400;
+    font-size: 14px;
 }
 .buttonLogin {
     background-color: #081B4E !important;
     width: 100%;
+}
+.senha {
+    float: right;
+    color: #F21A05;
+    font-size: 11px;
+}
+.iconInt {
+    height: 15px;
+    margin-right: 3px ;
 }
