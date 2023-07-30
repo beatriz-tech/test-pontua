@@ -7,6 +7,13 @@ export const slice = createSlice({
     label: "informe as suas credenciais de acesso ao portal",
     page: 1,
     isLogged: false,
+    users: [
+      { email: "1234@gmail.com", senha: "12345678" },
+      { email: "4321@gmail.com", senha: "87654321" },
+      { email: "1234@hotmail.com", senha: "12345678" },
+      { email: "4321@hotmail.com", senha: "12345678" },
+      { email: "8765@gmail.com", senha: "12345678" },
+    ],
   },
   reducers: {
     changeLoginText(state, { payload }) {

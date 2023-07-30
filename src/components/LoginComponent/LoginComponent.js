@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./LoginComponent.scss";
 import iconInterrogacao from "../../image/icon-interrogacao.png";
@@ -10,15 +11,45 @@ function LoginComponent(dataComponent) {
   const { title } = useSelector((state) => state.loginText);
   const { label } = useSelector((state) => state.loginText);
   const { page } = useSelector((state) => state.loginText);
+  const { users } = useSelector((state) => state.loginText);
+  const [dataUser, setDataUser] = useState({ email: "", senha: "" });
+  const [validated, setValidated] = useState(false);
+  const [validatedSenha, setValidatedSenha] = useState(false);
 
-  const handleSubmit = () => {
-    dispatch(
-      changeLoginText({
-        title: "Selecione o seu agente mais legal",
-        label: "Tenha a visão completa do seu agente.",
-        page: 4,
-      })
-    );
+  const handleChange = (event) => {
+    if (event.target.id === "email")
+      setDataUser({ email: event.target.value, senha: dataUser.senha });
+    if (event.target.id === "senha")
+      setDataUser({ email: dataUser.email, senha: event.target.value });
+  };
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      stopPage(event);
+    } else {
+      const found = users.find((element) => element.email === dataUser.email);
+      if (found) {
+        if (found.senha === dataUser.senha) {
+          setValidated(true);
+          dispatch(
+            changeLoginText({
+              title: "Selecione o seu agente mais legal",
+              label: "Tenha a visão completa do seu agente.",
+              page: 4,
+            })
+          );
+        } else {
+          stopPage(event);
+        }
+      } else {
+        stopPage(event);
+      }
+    }
+  };
+  const stopPage = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setValidated(false);
   };
   const handleEsqueciSenha = () => {
     dispatch(
@@ -30,15 +61,22 @@ function LoginComponent(dataComponent) {
       })
     );
   };
-  const handleResetSenha = () => {
-    dispatch(
-      changeLoginText({
-        title: "Tudo certo ;)",
-        label:
-          "Foi enviado um e-mail para você com instruções de como redefinir a sua senha.",
-        page: 3,
-      })
-    );
+  const handleResetSenha = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    } else {
+      setValidatedSenha(true);
+      dispatch(
+        changeLoginText({
+          title: "Tudo certo ;)",
+          label:
+            "Foi enviado um e-mail para você com instruções de como redefinir a sua senha.",
+          page: 3,
+        })
+      );
+    }
   };
 
   return (
@@ -49,18 +87,33 @@ function LoginComponent(dataComponent) {
       </h1>
       <p className="labelLogin">{label}</p>
       {page === 1 && (
-        <Form>
+        <Form validated={validated} onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
               size="lg"
+              id="email"
+              onChange={handleChange}
               type="email"
               placeholder="name@example.com"
+              required
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid email.
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Control size="lg" type="password" />
+            <Form.Control
+              size="lg"
+              id="senha"
+              onChange={handleChange}
+              type="password"
+              required
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid password.
+            </Form.Control.Feedback>
           </Form.Group>
-          <Button size="lg" onClick={handleSubmit} className="buttonLogin">
+          <Button size="lg" type="submit" className="buttonLogin">
             Submit form
           </Button>
           <div className="senha mt-2">
@@ -72,26 +125,25 @@ function LoginComponent(dataComponent) {
         </Form>
       )}
       {page === 2 && (
-        <Form>
+        <Form validated={validatedSenha} onSubmit={handleResetSenha}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Control
               type="email"
               size="lg"
+              required
               placeholder="name@example.com"
             />
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid email.
+            </Form.Control.Feedback>
           </Form.Group>
-          <Button
-            size="lg"
-            onClick={handleResetSenha}
-            className="buttonLogin"
-            type="submit"
-          >
+          <Button size="lg" className="buttonLogin" type="submit">
             Submit form
           </Button>
         </Form>
       )}
       {page === 3 && (
-        <Button size="lg" href="/login" className="buttonLogin">
+        <Button size="lg" href="/" className="buttonLogin">
           voltar para o login
         </Button>
       )}
