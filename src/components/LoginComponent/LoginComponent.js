@@ -11,6 +11,7 @@ function LoginComponent(dataComponent) {
   const { title } = useSelector((state) => state.loginText);
   const { label } = useSelector((state) => state.loginText);
   const { page } = useSelector((state) => state.loginText);
+  const { users } = useSelector((state) => state.loginText);
   const [dataUser, setDataUser] = useState({ email: "", senha: "" });
   const [validated, setValidated] = useState(false);
   const [validatedSenha, setValidatedSenha] = useState(false);
@@ -24,18 +25,31 @@ function LoginComponent(dataComponent) {
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      stopPage(event);
     } else {
-      setValidated(true);
-      dispatch(
-        changeLoginText({
-          title: "Selecione o seu agente mais legal",
-          label: "Tenha a visão completa do seu agente.",
-          page: 4,
-        })
-      );
+      const found = users.find((element) => element.email === dataUser.email);
+      if (found) {
+        if (found.senha === dataUser.senha) {
+          setValidated(true);
+          dispatch(
+            changeLoginText({
+              title: "Selecione o seu agente mais legal",
+              label: "Tenha a visão completa do seu agente.",
+              page: 4,
+            })
+          );
+        } else {
+          stopPage(event);
+        }
+      } else {
+        stopPage(event);
+      }
     }
+  };
+  const stopPage = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setValidated(false);
   };
   const handleEsqueciSenha = () => {
     dispatch(
