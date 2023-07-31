@@ -14,6 +14,8 @@ export const slice = createSlice({
       { email: "4321@hotmail.com", senha: "12345678" },
       { email: "8765@gmail.com", senha: "12345678" },
     ],
+    charactersState: [],
+    characterInitial: [],
   },
   reducers: {
     changeLoginText(state, { payload }) {
@@ -25,13 +27,20 @@ export const slice = createSlice({
         page: payload.page,
       };
     },
+    changeCharacter(state, { payload }) {
+      return {
+        ...state,
+        charactersState: payload.charactersState,
+        characterInitial: payload.characterInitial,
+      };
+    },
     logout(state) {
       return { ...state, isLogged: false, name: "" };
     },
   },
 });
 
-export const { changeLoginText, logout } = slice.actions;
+export const { changeLoginText, changeCharacter, logout } = slice.actions;
 
 export const selectLoginText = (state) => state;
 

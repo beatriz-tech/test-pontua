@@ -1,8 +1,28 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
-import logoImg from "../../image/icon-interrogacao.png";
+import { changeCharacter } from "../../redux/userSlice";
 import "./DropdownMarvel.scss";
 
 function DropdownMarvel() {
+  const dispatch = useDispatch();
+  const { charactersState } = useSelector((state) => state.loginText);
+  const { characterInitial } = useSelector((state) => state.loginText);
+
+  useEffect(() => {});
+
+  const handleDropdown = (event) => {
+    const result = charactersState.find(
+      (character) => character.name === event.target.innerText
+    );
+    dispatch(
+      changeCharacter({
+        charactersState: charactersState,
+        characterInitial: result,
+      })
+    );
+  };
+
   return (
     <div>
       <Dropdown>
@@ -12,20 +32,38 @@ function DropdownMarvel() {
           id="dropdown-basic"
           size="lg"
         >
-          Dropdown Button
+          <img
+            className="imageCharacter"
+            src={
+              characterInitial.thumbnail.path +
+              "." +
+              characterInitial.thumbnail.extension
+            }
+            alt="imagem"
+          />
+          {characterInitial.name}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">
-            <spnan>
-              <img src={logoImg} class="img-fluid logoImg" alt="..." />
-            </spnan>
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Menu className="menu">
+          {charactersState.map((character) => (
+            <Dropdown.Item key={character.id}>
+              <div onClick={handleDropdown}>
+                <img
+                  className="imageCharacter"
+                  src={
+                    character.thumbnail.path +
+                    "." +
+                    character.thumbnail.extension
+                  }
+                  alt="imagem"
+                />
+                {character.name}
+              </div>
+            </Dropdown.Item>
+          ))}
         </Dropdown.Menu>
       </Dropdown>
+
       <Button size="lg" className="btnEntrar mt-3">
         Entrar
       </Button>

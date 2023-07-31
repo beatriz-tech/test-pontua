@@ -20,7 +20,7 @@ function Login() {
         <div className="col-lg text-center">
           <img src={photoLogin} class="img-fluid" alt="..." />
         </div>
-        <div className="col-lg-4 p-5">
+        <div className="col-md-4 p-5">
           <div className="container-fluid bg-white p-5 conteinerLogin rounded ">
             <LoginComponent dataComponent={dataComponent}></LoginComponent>
           </div>
