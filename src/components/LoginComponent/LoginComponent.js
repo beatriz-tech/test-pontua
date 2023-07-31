@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./LoginComponent.scss";
+import api from "../../services/api.js";
 import iconInterrogacao from "../../image/icon-interrogacao.png";
 import DropdownMarvel from "../DropdownMarvel/DropdownMarvel";
 import { useDispatch, useSelector } from "react-redux";
 import { changeLoginText } from "../../redux/userSlice";
+import { changeCharacter } from "../../redux/userSlice";
 
 function LoginComponent(dataComponent) {
   const dispatch = useDispatch();
@@ -15,6 +17,21 @@ function LoginComponent(dataComponent) {
   const [dataUser, setDataUser] = useState({ email: "", senha: "" });
   const [validated, setValidated] = useState(false);
   const [validatedSenha, setValidatedSenha] = useState(false);
+
+  useEffect(() => {
+    api
+      .get("/characters")
+      .then((response) => {
+        const characters = response.data.data.results;
+        dispatch(
+          changeCharacter({
+            charactersState: characters,
+            characterInitial: characters[0],
+          })
+        );
+      })
+      .catch((err) => console.log(err));
+  }, [dispatch]);
 
   const handleChange = (event) => {
     if (event.target.id === "email")

@@ -14,7 +14,8 @@ export const slice = createSlice({
       { email: "4321@hotmail.com", senha: "12345678" },
       { email: "8765@gmail.com", senha: "12345678" },
     ],
-    characterState: [],
+    charactersState: [],
+    characterInitial: [],
   },
   reducers: {
     changeLoginText(state, { payload }) {
@@ -29,7 +30,8 @@ export const slice = createSlice({
     changeCharacter(state, { payload }) {
       return {
         ...state,
-        characterState: payload,
+        charactersState: payload.charactersState,
+        characterInitial: payload.characterInitial,
       };
     },
     logout(state) {

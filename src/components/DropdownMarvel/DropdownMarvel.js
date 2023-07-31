@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
 import { changeCharacter } from "../../redux/userSlice";
-import api from "../../services/api.js";
 import "./DropdownMarvel.scss";
 
 function DropdownMarvel() {
   const dispatch = useDispatch();
-  const [characters, setCharacters] = useState([]);
-  const { characterState } = useSelector((state) => state.loginText);
+  const { charactersState } = useSelector((state) => state.loginText);
+  const { characterInitial } = useSelector((state) => state.loginText);
 
-  useEffect(() => {
-    api
-      .get("/characters")
-      .then((response) => {
-        const characters = response.data.data.results;
-        dispatch(changeCharacter(characters[0]));
-        setCharacters(characters);
+  useEffect(() => {});
+
+  const handleDropdown = (event) => {
+    const result = charactersState.find(
+      (character) => character.name === event.target.innerText
+    );
+    dispatch(
+      changeCharacter({
+        charactersState: charactersState,
+        characterInitial: result,
       })
-      .catch((err) => console.log(err));
-  }, [dispatch]);
+    );
+  };
 
   return (
     <div>
@@ -30,20 +32,33 @@ function DropdownMarvel() {
           id="dropdown-basic"
           size="lg"
         >
-          {characterState.name}
+          <img
+            className="imageCharacter"
+            src={
+              characterInitial.thumbnail.path +
+              "." +
+              characterInitial.thumbnail.extension
+            }
+            alt="imagem"
+          />
+          {characterInitial.name}
         </Dropdown.Toggle>
 
         <Dropdown.Menu className="menu">
-          {characters.map((character) => (
+          {charactersState.map((character) => (
             <Dropdown.Item key={character.id}>
-              <img
-                className="imageCharacter"
-                src={
-                  character.thumbnail.path + "." + character.thumbnail.extension
-                }
-                alt="imagem"
-              />
-              {character.name}
+              <div onClick={handleDropdown}>
+                <img
+                  className="imageCharacter"
+                  src={
+                    character.thumbnail.path +
+                    "." +
+                    character.thumbnail.extension
+                  }
+                  alt="imagem"
+                />
+                {character.name}
+              </div>
             </Dropdown.Item>
           ))}
         </Dropdown.Menu>
