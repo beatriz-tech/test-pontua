@@ -1,8 +1,26 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
-import logoImg from "../../image/icon-interrogacao.png";
+import { changeCharacter } from "../../redux/userSlice";
+import api from "../../services/api.js";
 import "./DropdownMarvel.scss";
 
 function DropdownMarvel() {
+  const dispatch = useDispatch();
+  const [characters, setCharacters] = useState([]);
+  const { characterState } = useSelector((state) => state.loginText);
+
+  useEffect(() => {
+    api
+      .get("/characters")
+      .then((response) => {
+        const characters = response.data.data.results;
+        dispatch(changeCharacter(characters[0]));
+        setCharacters(characters);
+      })
+      .catch((err) => console.log(err));
+  }, [dispatch]);
+
   return (
     <div>
       <Dropdown>
@@ -12,20 +30,25 @@ function DropdownMarvel() {
           id="dropdown-basic"
           size="lg"
         >
-          Dropdown Button
+          {characterState.name}
         </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">
-            <spnan>
-              <img src={logoImg} class="img-fluid logoImg" alt="..." />
-            </spnan>
-            Action
-          </Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+        <Dropdown.Menu className="menu">
+          {characters.map((character) => (
+            <Dropdown.Item key={character.id}>
+              <img
+                className="imageCharacter"
+                src={
+                  character.thumbnail.path + "." + character.thumbnail.extension
+                }
+                alt="imagem"
+              />
+              {character.name}
+            </Dropdown.Item>
+          ))}
         </Dropdown.Menu>
       </Dropdown>
+
       <Button size="lg" className="btnEntrar mt-3">
         Entrar
       </Button>
