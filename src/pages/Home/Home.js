@@ -1,10 +1,9 @@
-import { Button } from "react-bootstrap";
+import NavBar from "../../components/NavBar/NavBar";
 
 function Home() {
   return (
     <div>
-      <h1>Home</h1>
-      <Button>aaaa</Button>
+      <NavBar></NavBar>
     </div>
   );
 }

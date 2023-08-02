@@ -1,7 +1,9 @@
+import NavBar from "../../components/NavBar/NavBar";
+
 function Perfil() {
   return (
     <div>
-      <h1>Perfil</h1>
+      <NavBar></NavBar>
     </div>
   );
 }
