@@ -1,4 +1,3 @@
-import { Button } from "react-bootstrap";
 import logoImg from "../../image/pontuaLogoAzul.png";
 import "./NavBar.scss";
 
@@ -7,7 +6,7 @@ function NavBar() {
     <div className="container-fluid">
       <div class="row flex-nowrap">
         <div className="colNav col-auto col-md-2 min-vh-100">
-          <a className="col-lg-2">
+          <a href="/home">
             <img src={logoImg} class="logoAzulImg m-3" alt="..." />
           </a>
           <ul className="nav nav-pills flex-column mb-5 border-bottom border-top pt-2 pb-2 border-light">
