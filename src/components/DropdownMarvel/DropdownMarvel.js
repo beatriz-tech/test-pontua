@@ -22,6 +22,7 @@ function DropdownMarvel() {
       })
     );
   };
+  const btnEntrar = () => {};
 
   return (
     <div>
@@ -64,7 +65,7 @@ function DropdownMarvel() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Button size="lg" className="btnEntrar mt-3">
+      <Button size="lg" onClick={btnEntrar} className="btnEntrar mt-3">
         Entrar
       </Button>
     </div>

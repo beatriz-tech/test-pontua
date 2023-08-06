@@ -1,6 +1,7 @@
 import { Form, InputGroup } from "react-bootstrap";
 import "./Home.scss";
 import NavBar from "../../components/NavBar/NavBar";
+import Cards from "../../components/Cards/Cards.js";
 
 function Home() {
   return (
@@ -30,6 +31,9 @@ function Home() {
               placeholder="Busque um agente"
             />
           </InputGroup>
+          <div className="m-3">
+            <Cards></Cards>
+          </div>
         </div>
       </div>
     </div>
