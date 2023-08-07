@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "./LoginComponent.scss";
+import { toastr } from "react-redux-toastr";
 import api from "../../services/api.js";
 import DropdownMarvel from "../DropdownMarvel/DropdownMarvel";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,6 +48,7 @@ function LoginComponent(dataComponent) {
       if (found) {
         if (found.senha === dataUser.senha) {
           setValidated(true);
+          toastr.success("Success", "Usuário logado com sucesso");
           dispatch(
             changeLoginText({
               title: "Selecione o seu agente mais legal",
@@ -56,8 +58,10 @@ function LoginComponent(dataComponent) {
           );
         } else {
           stopPage(event);
+          toastr.error("Falha", "Senha Inválida");
         }
       } else {
+        toastr.error("Falha", "Email não encontrado");
         stopPage(event);
       }
     }

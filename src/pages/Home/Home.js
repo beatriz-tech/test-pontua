@@ -1,5 +1,4 @@
 import "./Home.scss";
-import { Form, InputGroup } from "react-bootstrap";
 import NavBar from "../../components/NavBar/NavBar";
 import Cards from "../../components/Cards/Cards";
 
