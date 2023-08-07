@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
 import { changeCharacter } from "../../redux/userSlice";
@@ -22,7 +23,6 @@ function DropdownMarvel() {
       })
     );
   };
-  const btnEntrar = () => {};
 
   return (
     <div>
@@ -65,9 +65,11 @@ function DropdownMarvel() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <Button size="lg" onClick={btnEntrar} className="btnEntrar mt-3">
-        Entrar
-      </Button>
+      <NavLink to="/perfil">
+        <Button size="lg" className="btnEntrar mt-3">
+          Entrar
+        </Button>
+      </NavLink>
     </div>
   );
 }

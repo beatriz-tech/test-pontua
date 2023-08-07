@@ -1,15 +1,16 @@
 import logoImg from "../../image/pontuaLogoAzul.png";
+import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
 
 function NavBar() {
   return (
     <div className="colNav min-vh-100">
-      <a href="/home">
+      <NavLink className="linkNav" to="/home">
         <img src={logoImg} class="logoAzulImg m-3" alt="..." />
-      </a>
+      </NavLink>
       <ul className="nav nav-pills flex-column mb-5 border-bottom border-top pt-2 pb-2 border-light">
-        <li className="nav-item">
-          <a href="/home" className="nav-link navLink" arial-current="page">
+        <li className="nav-item ">
+          <NavLink className="linkNav" to="/home">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -21,10 +22,10 @@ function NavBar() {
               <path d="M5 1v8H1V1h4zM1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H1zm13 2v5H9V2h5zM9 1a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9zM5 13v2H3v-2h2zm-2-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3zm12-1v2H9v-2h6zm-6-1a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H9z" />
             </svg>
             &nbsp; Home
-          </a>
+          </NavLink>
         </li>
-        <li className="nav-item">
-          <a href="/perfil" className="nav-link navLink">
+        <li className="nav-item pt-2">
+          <NavLink className="linkNav" to="/perfil">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -36,7 +37,7 @@ function NavBar() {
               <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0Zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4Zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10Z" />
             </svg>
             &nbsp; Perfil
-          </a>
+          </NavLink>
         </li>
       </ul>
       <ul className="nav nav-pills flex-column">

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tab, Tabs } from "react-bootstrap";
+import { Tab, Tabs, Image } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import NavBar from "../../components/NavBar/NavBar";
 import "./Perfil.scss";
@@ -22,10 +22,10 @@ function Perfil() {
         <div className="col m-0 bg-white containerTabs">
           <h1 className="title">
             {tabSelected} <span className="barra">/</span>
-            <span className="title subTitle">A-Bomb</span>
+            <span className="title subTitle">{characterInitial.name}</span>
           </h1>
           <Tabs
-            defaultActiveKey="profile"
+            defaultActiveKey="visaoGeral"
             id="justify-tab-example"
             variant="underline"
             onClick={handleTabs}
@@ -33,19 +33,59 @@ function Perfil() {
             justify
           >
             <Tab eventKey="visaoGeral" className="tabs" title="Visão Geral">
-              {characterInitial}
+              <div class="row">
+                <div class="col-2">
+                  <Image
+                    className="imgVisaoGeral"
+                    src={
+                      characterInitial.thumbnail.path +
+                      "." +
+                      characterInitial.thumbnail.extension
+                    }
+                    roundedCircle
+                  />
+                </div>
+                <div class="col">
+                  <p>{characterInitial.name}</p>
+                  <p className="subText">{characterInitial.description}</p>
+                </div>
+              </div>
             </Tab>
             <Tab eventKey="teams" title="Teams">
-              Tab content for Profile
+              <ul variant="flush" className="pt-5">
+                {characterInitial.comics.items.map((comic) => (
+                  <li className="subText" key={comic.id}>
+                    {comic.name}
+                  </li>
+                ))}
+              </ul>
             </Tab>
             <Tab eventKey="powers" title="Powers">
-              Tab content for Loooonger Tab
+              <ul variant="flush" className="pt-5">
+                {characterInitial.series.items.map((comic) => (
+                  <li className="subText" key={comic.id}>
+                    {comic.name}
+                  </li>
+                ))}
+              </ul>
             </Tab>
             <Tab eventKey="species" title="Species">
-              Tab content for Contact
+              <ul variant="flush" className="pt-5">
+                {characterInitial.stories.items.map((comic) => (
+                  <li className="subText" key={comic.id}>
+                    {comic.name}
+                  </li>
+                ))}
+              </ul>
             </Tab>
             <Tab eventKey="authors" title="Authors">
-              Tab content for Contact
+              <ul variant="flush" className="pt-5">
+                {characterInitial.events.items.map((comic) => (
+                  <li className="subText" key={comic.id}>
+                    {comic.name}
+                  </li>
+                ))}
+              </ul>
             </Tab>
           </Tabs>
         </div>
