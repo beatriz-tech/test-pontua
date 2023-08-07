@@ -1,8 +1,14 @@
+import { useState } from "react";
+import { Modal, Button } from "react-bootstrap";
 import logoImg from "../../image/pontuaLogoAzul.png";
 import { NavLink } from "react-router-dom";
 import "./NavBar.scss";
 
 function NavBar() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div className="colNav min-vh-100">
       <NavLink className="linkNav" to="/home">
@@ -42,7 +48,7 @@ function NavBar() {
       </ul>
       <ul className="nav nav-pills flex-column">
         <li className="nav-item">
-          <a href="/" className="nav-link navLink">
+          <span onClick={handleShow} className="nav-link navLink">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -57,9 +63,23 @@ function NavBar() {
               />
             </svg>
             &nbsp; Sair
-          </a>
+          </span>
         </li>
       </ul>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Tem certeza que deseja sair?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Todas as informações serão deletadas.</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancelar
+          </Button>
+          <Button variant="danger" href="/" onClick={handleClose}>
+            Confirmar
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

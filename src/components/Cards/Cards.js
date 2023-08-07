@@ -1,7 +1,6 @@
 import "./Cards.scss";
 
 function Cards(listCharacters) {
-  console.log(listCharacters);
   let characters = listCharacters.listCharacters;
   let divCard = [];
 
