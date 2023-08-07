@@ -108,7 +108,7 @@ function LoginComponent(dataComponent) {
       <p className="labelLogin">{label}</p>
       {page === 1 && (
         <Form validated={validated} onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3">
             <Form.Control
               size="lg"
               id="email"
@@ -121,7 +121,7 @@ function LoginComponent(dataComponent) {
               Please provide a valid email.
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Group className="mb-3">
             <Form.Control
               size="lg"
               id="senha"
@@ -156,7 +156,7 @@ function LoginComponent(dataComponent) {
       )}
       {page === 2 && (
         <Form validated={validatedSenha} onSubmit={handleResetSenha}>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+          <Form.Group className="mb-3">
             <Form.Control
               type="email"
               size="lg"
