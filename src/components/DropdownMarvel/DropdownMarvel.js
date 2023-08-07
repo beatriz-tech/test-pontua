@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { toastr } from "react-redux-toastr";
 import { useSelector, useDispatch } from "react-redux";
 import { Dropdown, Button } from "react-bootstrap";
 import { changeCharacter } from "../../redux/userSlice";
@@ -23,27 +24,45 @@ function DropdownMarvel() {
       })
     );
   };
+  const handleSubmit = (event) => {
+    if (!characterInitial) {
+      event.preventDefault();
+      event.stopPropagation();
+      toastr.error("Falha", "Escolha um agente válido");
+    }
+  };
 
   return (
     <div>
       <Dropdown>
-        <Dropdown.Toggle
-          variant="Secondary"
-          className="dropdown"
-          id="dropdown-basic"
-          size="lg"
-        >
-          <img
-            className="imageCharacter"
-            src={
-              characterInitial.thumbnail.path +
-              "." +
-              characterInitial.thumbnail.extension
-            }
-            alt="imagem"
-          />
-          {characterInitial.name}
-        </Dropdown.Toggle>
+        {characterInitial ? (
+          <Dropdown.Toggle
+            variant="Secondary"
+            className="dropdown"
+            id="dropdown-basic"
+            size="lg"
+          >
+            <img
+              className="imageCharacter"
+              src={
+                characterInitial.thumbnail.path +
+                "." +
+                characterInitial.thumbnail.extension
+              }
+              alt="imagem"
+            />
+            {characterInitial.name}
+          </Dropdown.Toggle>
+        ) : (
+          <Dropdown.Toggle
+            variant="Secondary"
+            className="dropdown"
+            id="dropdown-basic"
+            size="lg"
+          >
+            Selecione um agente
+          </Dropdown.Toggle>
+        )}
 
         <Dropdown.Menu className="menu">
           {charactersState.map((character) => (
@@ -64,9 +83,8 @@ function DropdownMarvel() {
           ))}
         </Dropdown.Menu>
       </Dropdown>
-
       <NavLink to="/perfil">
-        <Button size="lg" className="btnEntrar mt-3">
+        <Button size="lg" onClick={handleSubmit} className="btnEntrar mt-3">
           Entrar
         </Button>
       </NavLink>

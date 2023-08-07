@@ -26,7 +26,6 @@ function LoginComponent(dataComponent) {
         dispatch(
           changeCharacter({
             charactersState: characters,
-            characterInitial: characters[0],
           })
         );
       })
