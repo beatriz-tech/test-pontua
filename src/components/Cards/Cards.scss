@@ -1,3 +1,49 @@
-.card {
-    flex-direction: row;
-  }
+.homeCol{
+    border-radius: 0px;
+    font-family: Epilogue;
+    border: 0px;
+}
+.searchDiv{
+    border-left: 1px solid;
+    border-color: rgb(239, 239, 239);
+}
+.cardSize{
+    width: 20em;
+}
+.imgCard{
+    float: left;
+    border-radius: 10%;
+    height: 9em;
+    object-fit: cover;
+    object-position: center;
+    width: 6em;
+}
+.rowCard{
+    max-height: 10em;
+
+}
+.textBodyCard{
+    max-height: 10em;
+    padding: 1em;
+}
+.textCard{
+    font-family: Epilogue;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 12px;
+    letter-spacing: -0.03em;
+    text-align: left;
+    max-height: 7em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.titleCard{
+    font-family: Epilogue;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: -0.03em;
+    text-align: left;
+
+}

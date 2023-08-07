@@ -8,7 +8,6 @@ function Perfil() {
   const [tabSelected, setTabSelected] = useState("Visão Geral");
   const { characterInitial } = useSelector((state) => state.loginText);
 
-  console.log(characterInitial);
   const handleTabs = (event) => {
     setTabSelected(event.target.innerText);
   };
@@ -36,13 +35,12 @@ function Perfil() {
               <div class="row">
                 <div class="col-2">
                   <Image
-                    className="imgVisaoGeral"
+                    className="imgVisaoGeral img-fluid"
                     src={
                       characterInitial.thumbnail.path +
                       "." +
                       characterInitial.thumbnail.extension
                     }
-                    roundedCircle
                   />
                 </div>
                 <div class="col">

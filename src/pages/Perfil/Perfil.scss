@@ -24,9 +24,9 @@
     padding-left: 5%;
 }
 .imgVisaoGeral{
-    height: 81%;
-    width: 88%;
-    padding-left: 16%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
 }
 .subText{
     color: #667085;
