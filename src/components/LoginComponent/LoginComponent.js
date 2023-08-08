@@ -86,15 +86,23 @@ function LoginComponent(dataComponent) {
       event.preventDefault();
       event.stopPropagation();
     } else {
-      setValidatedSenha(true);
-      dispatch(
-        changeLoginText({
-          title: "Tudo certo ;)",
-          label:
-            "Foi enviado um e-mail para você com instruções de como redefinir a sua senha.",
-          page: 3,
-        })
-      );
+      const found = users.find((element) => element.email === dataUser.email);
+      if (found) {
+        setValidated(true);
+        setValidatedSenha(true);
+        toastr.success("Success", "Usuário logado com sucesso");
+        dispatch(
+          changeLoginText({
+            title: "Tudo certo ;)",
+            label:
+              "Foi enviado um e-mail para você com instruções de como redefinir a sua senha.",
+            page: 3,
+          })
+        );
+      } else {
+        toastr.error("Falha", "Email não encontrado");
+        stopPage(event);
+      }
     }
   };
 
@@ -157,10 +165,12 @@ function LoginComponent(dataComponent) {
         <Form validated={validatedSenha} onSubmit={handleResetSenha}>
           <Form.Group className="mb-3">
             <Form.Control
-              type="email"
               size="lg"
-              required
+              id="email"
+              onChange={handleChange}
+              type="email"
               placeholder="name@example.com"
+              required
             />
             <Form.Control.Feedback type="invalid">
               Please provide a valid email.

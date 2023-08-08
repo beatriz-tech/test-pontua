@@ -42,7 +42,11 @@ function Cards(listCharacters) {
                 </div>
                 <div className="col-8 textBodyCard">
                   <p className="titleCard">{characters[i].name}</p>
-                  <p className="textCard">{characters[i].description}</p>
+                  {characters[i].description ? (
+                    <p className="textCard">{characters[i].description}</p>
+                  ) : (
+                    <p className="textCard">No description found</p>
+                  )}
                 </div>
               </div>
             </NavLink>
@@ -69,7 +73,11 @@ function Cards(listCharacters) {
                 </div>
                 <div className="col-8 textBodyCard">
                   <p className="titleCard">{characters[i + 1].name}</p>
-                  <p className="textCard">{characters[i + 1].description}</p>
+                  {characters[i + 1].description ? (
+                    <p className="textCard">{characters[i + 1].description}</p>
+                  ) : (
+                    <p className="textCard">No description found</p>
+                  )}
                 </div>
               </div>
             </NavLink>
@@ -97,7 +105,11 @@ function Cards(listCharacters) {
                 </div>
                 <div className="col-8 textBodyCard">
                   <p className="titleCard">{characters[i + 2].name}</p>
-                  <p className="textCard">{characters[i + 2].description}</p>
+                  {characters[i + 2].description ? (
+                    <p className="textCard">{characters[i + 2].description}</p>
+                  ) : (
+                    <p className="textCard">No description found</p>
+                  )}
                 </div>
               </div>
             </NavLink>
@@ -124,7 +136,11 @@ function Cards(listCharacters) {
                 </div>
                 <div className="col-8 textBodyCard">
                   <p className="titleCard">{characters[i + 3].name}</p>
-                  <p className="textCard">{characters[i + 3].description}</p>
+                  {characters[i + 3].description ? (
+                    <p className="textCard">{characters[i + 3].description}</p>
+                  ) : (
+                    <p className="textCard">No description found</p>
+                  )}
                 </div>
               </div>
             </NavLink>
@@ -157,7 +173,11 @@ function Cards(listCharacters) {
               </div>
               <div className="col-8 textBodyCard">
                 <p className="titleCard">{characters[i].name}</p>
-                <p className="textCard">{characters[i].description}</p>
+                {characters[i].description ? (
+                  <p className="textCard">{characters[i].description}</p>
+                ) : (
+                  <p className="textCard">No description found</p>
+                )}
               </div>
             </div>
           </NavLink>

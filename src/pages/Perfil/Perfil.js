@@ -45,45 +45,65 @@ function Perfil() {
                 </div>
                 <div class="col">
                   <p>{characterInitial.name}</p>
-                  <p className="subText">{characterInitial.description}</p>
+                  {characterInitial.description ? (
+                    <p className="subText">{characterInitial.description}</p>
+                  ) : (
+                    <p className="subText">No description found</p>
+                  )}
                 </div>
               </div>
             </Tab>
             <Tab eventKey="teams" title="Teams">
-              <ul variant="flush" className="pt-5">
-                {characterInitial.comics.items.map((comic) => (
-                  <li className="subText" key={comic.id}>
-                    {comic.name}
-                  </li>
-                ))}
-              </ul>
+              {characterInitial.comics.items ? (
+                <ul variant="flush" className="pt-5">
+                  {characterInitial.comics.items.map((comic) => (
+                    <li className="subText" key={comic.id}>
+                      {comic.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="subText">No description found</p>
+              )}
             </Tab>
             <Tab eventKey="powers" title="Powers">
-              <ul variant="flush" className="pt-5">
-                {characterInitial.series.items.map((comic) => (
-                  <li className="subText" key={comic.id}>
-                    {comic.name}
-                  </li>
-                ))}
-              </ul>
+              {characterInitial.series.items ? (
+                <ul variant="flush" className="pt-5">
+                  {characterInitial.series.items.map((comic) => (
+                    <li className="subText" key={comic.id}>
+                      {comic.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="subText">No description found</p>
+              )}
             </Tab>
             <Tab eventKey="species" title="Species">
-              <ul variant="flush" className="pt-5">
-                {characterInitial.stories.items.map((comic) => (
-                  <li className="subText" key={comic.id}>
-                    {comic.name}
-                  </li>
-                ))}
-              </ul>
+              {characterInitial.stories.items ? (
+                <ul variant="flush" className="pt-5">
+                  {characterInitial.stories.items.map((comic) => (
+                    <li className="subText" key={comic.id}>
+                      {comic.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="subText">No description found</p>
+              )}
             </Tab>
             <Tab eventKey="authors" title="Authors">
-              <ul variant="flush" className="pt-5">
-                {characterInitial.events.items.map((comic) => (
-                  <li className="subText" key={comic.id}>
-                    {comic.name}
-                  </li>
-                ))}
-              </ul>
+              {characterInitial.events.items ? (
+                <ul variant="flush" className="pt-5">
+                  {characterInitial.events.items.map((comic) => (
+                    <li className="subText" key={comic.id}>
+                      {comic.name}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="subText">No description found</p>
+              )}
             </Tab>
           </Tabs>
         </div>
