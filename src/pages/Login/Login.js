@@ -1,9 +1,14 @@
 import "./Login.scss";
 import logoImg from "../../image/PontuaLogo.png";
 import photoLogin from "../../image/photoLogin.png";
-import FormLogin from "../../components/FormLogin/FormLogin";
+import LoginComponent from "../../components/LoginComponent/LoginComponent";
 
 function Login() {
+  const dataComponent = {
+    title: "Bem-vindo",
+    label: "informe as suas credenciais de acesso ao portal",
+    page: 1,
+  };
   return (
     <div className="container-fluid p-3 login">
       <div className="row">
@@ -13,10 +18,12 @@ function Login() {
       </div>
       <div className="row">
         <div className="col-lg text-center">
-          <img src={photoLogin} class="img-fluid photoLogin" alt="..." />
+          <img src={photoLogin} class="img-fluid" alt="..." />
         </div>
-        <div className="col-lg-4 p-5">
-          <FormLogin></FormLogin>
+        <div className="col-md-4 p-5">
+          <div className="container-fluid bg-white p-5 conteinerLogin rounded ">
+            <LoginComponent dataComponent={dataComponent}></LoginComponent>
+          </div>
         </div>
       </div>
     </div>
